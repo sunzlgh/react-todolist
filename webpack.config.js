@@ -35,11 +35,17 @@ module.exports = {
         }, 
         {
             test: /\.scss$/,
-            use: ExtractTextPlugin.extract({
-	          fallback: "style-loader",
-	          use: ['css-loader', 'sass-loader']
-	        })
-        }]
+            loaders: ['style-loader', 'css-loader', 'sass-loader']
+             
+        }
+        // {
+        //     test: /\.scss$/,
+        //     use: ExtractTextPlugin.extract({
+	    //       fallback: "style-loader",
+	    //       use: ['css-loader', 'sass-loader']
+	    //     })
+        // }
+        ]
     },
     plugins: [
         //使用uglifyJs压缩js代码
@@ -48,7 +54,7 @@ module.exports = {
             template: './index.html'   // 模版文件
         }),
         new webpack.HotModuleReplacementPlugin(), // 热加载插件
-        new ExtractTextPlugin('./styles/index.scss')  //分离css文件,注意该插件由于和webpack2不兼容，需要指定版本
+        // new ExtractTextPlugin('./styles/index.scss')  //分离css文件,注意该插件由于和webpack2不兼容，需要指定版本
         //把入口文件里面的数组打包成verdors.js
         // new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
     ],
