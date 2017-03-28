@@ -1,5 +1,5 @@
 # react-todolist
-react+webpack2.0
+react+webpack2.0+es6
 
 ## /app
 * index.js 入口文件
@@ -11,4 +11,5 @@ react+webpack2.0
 
 ###  打包发布
 `npm run build`  
+     
 打包发布时，注意在配置中将devServer调试模式关闭！

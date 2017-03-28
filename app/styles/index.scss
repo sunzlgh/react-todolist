@@ -1,40 +1,5 @@
-body {
-    padding: 0 50px;
-    background-color: #66CCFF;
-    font-family: sans-serif;
-}
+//基础样式
+@import "lib/base.scss";
 
-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #FFF;
-}
-
-button {
-    padding: 10px;
-    font-size: 16px;
-    margin: 10px;
-    background-color: #0066FF;
-    color: #FFF;
-    border: 2px solid #0066FF;
-}
-
-button:hover {
-    background-color: #003399;
-    border: 2px solid #003399;
-    cursor: pointer;
-}
-
-.theList {
-    list-style: none;
-    padding-left: 0;
-    width: 50%;
-}
-
-.theList li {
-    color: #333;
-    background-color: rgba(255, 255, 255, .5);
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-}
+//react组件样式
+// @import "components/todolist.scss"

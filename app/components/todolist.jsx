@@ -1,34 +1,34 @@
-var React = require('react');
-var TypeNew  = require('./typenew');
-var List = require('./list');
+import React from 'react';
+import TypeNew  from './typenew';
+import List from './list';
 
 //父组件
-var Todolist = React.createClass({
-    //初始化状态
-    getInitialState: function(){
-        return{
-            todolist:['111', '222', '333']
-        };
-    },
-    render: function(){
+class Todolist extends React.Component{
+    constructor() {
+        super(); //调用父类的构造函数
+        this.state = {  //定义组件状态
+            todolist: ['111', '222', '333']
+        }
+    }
+    render(){
         return(
             <div>
-                <TypeNew todo={this.state.todolist} onAdd={this.handleChange} />
-                <List todo={this.state.todolist} onChange={this.handleChange} />
+                <TypeNew todo={this.state.todolist} onAdd={this.handleChange.bind(this)} />
+                <List todo={this.state.todolist} onChange={this.handleChange.bind(this)} />
             </div>
         )
-    },
-    handleChange: function (rows) {
+    }
+    handleChange (rows) {
         this.setState({
             todolist: rows
         });
-    },
-    DelClick:function(index){
+    }
+    DelClick(index){
         this.state.todolist.splice(index,1);
         this.setState({
             todolist: this.state.todolist
         })
-    }
-});
-        
-module.exports = Todolist;
+    } 
+}
+
+export default Todolist;

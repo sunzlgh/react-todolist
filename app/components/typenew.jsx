@@ -1,10 +1,13 @@
-var React = require('react');
+import React from 'react';
+import List from './list';
+import Todolist from './todolist';
+
 
 //输入框组件，用于新增数据
-var TypeNew = React.createClass({
-    handleAdd: function(){
-        var newthing = this.refs.inputText.value.trim();
-        var rows = this.props.todo;
+class TypeNew extends React.Component{
+    handleAdd(){
+        let newthing = this.refs.inputText.value.trim();
+        let rows = this.props.todo;
 
         if(newthing == ""){
             alert("数据不能为空");
@@ -14,15 +17,15 @@ var TypeNew = React.createClass({
         this.props.onAdd(rows);
         
         this.refs.inputText.value = "";
-    },
-    render: function(){
+    }
+    render(){
         return (
             <div className="header">
                 <input type="text" name="" ref="inputText"/>
-                <button onClick={this.handleAdd}>增加</button>
+                <button onClick={this.handleAdd.bind(this)}>增加</button>
             </div>
         )
     }
-})
+}
 
-module.exports = TypeNew;
+export default TypeNew;
