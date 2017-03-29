@@ -19,48 +19,60 @@ module.exports = {
     //启动dev source map，出错以后就会采用source-map的形式直接显示你出错代码的位置
     devtool: 'eval-source-map',
     devServer: {
-        contentBase: "./",  // 本地服务器所加载的页面所在的目录
-        historyApiFallback: true,  // 不跳转
-        inline: true  // 实时刷新
+        contentBase: "./", // 本地服务器所加载的页面所在的目录
+        historyApiFallback: true, // 不跳转
+        inline: true // 实时刷新
     },
     module: {
         rules: [{
-            test: /\.(js|jsx)?$/,
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        [
-                            'es2015', 
-                            { "modules": false }
-                        ], 
-                        'react'
-                    ]
-                }
-            }]
-        },
-        {
-            test: /\.(sass|scss)$/,
-            use: ExtractTextPlugin.extract({
-                fallback: "style-loader",
-                use: ['css-loader', 'sass-loader']
-            })
-        }]
+                test: /\.(js|jsx)?$/,
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            [
+                                'es2015',
+                                {
+                                    "modules": false
+                                }
+                            ],
+                            'react'
+                        ]
+                    }
+                }]
+            },
+            {
+                test: /\.(sass|scss|css)$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: ['css-loader', 'sass-loader']
+                })
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 100000
+                    }
+                }]
+            }
+        ]
     },
     plugins: [
         //使用uglifyJs压缩js代码
-        new webpack.optimize.UglifyJsPlugin({ 
+        new webpack.optimize.UglifyJsPlugin({
             minimize: true,
-            comments: false,        //去掉注释
+            comments: false, //去掉注释
             compress: {
-                warnings: false    //忽略警告,要不然会有一大堆的黄色字体出现……
+                warnings: false //忽略警告,要不然会有一大堆的黄色字体出现……
             }
         }),
         new HtmlwebpackPlugin({
-            template: './index.html'   // 模版文件
+            template: './index.html' // 模版文件
         }),
         new webpack.HotModuleReplacementPlugin(), // 热加载插件
-        new ExtractTextPlugin('styles.css'),  //分离css文件,注意该插件由于和webpack2不兼容，需要指定版本
+        new ExtractTextPlugin('styles.css'), //分离css文件,注意该插件由于和webpack2不兼容，需要指定版本
         //把入口文件里面的数组打包成verdors.js
         // new webpack.optimize.CommonsChunkPlugin({name: 'vendors', filename: 'vendors.js'})
     ],

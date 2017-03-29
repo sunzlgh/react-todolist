@@ -1,9 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    margin: auto;
-    color: #202020;
-    background-color: #fafafa;
-    font-family: "Open Sans","Helvetica",Arial,sans-serif;
-    font-size: 13px;
-    padding: 0 !important;
-    margin-bottom: 0 !important;
+    font-size: 12px;
+    line-height: 1;
+    font-family: \5FAE\8F6F\96C5\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #faf9f9;
+}
+
+a {
+    color: #222;
+    text-decoration: none;
 }

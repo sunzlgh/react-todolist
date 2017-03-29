@@ -1,9 +1,11 @@
-import '../styles/components/todolist.scss';
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import * as RBt from "react-bootstrap";
 
 import TypeNew from './typenew';
 import Todolist from './todolist';
 
+import '../styles/components/todolist.scss';
 
 //列表组件，展示、删除、修改数据
 class List extends React.Component{
@@ -13,7 +15,6 @@ class List extends React.Component{
             changenum: -1,      //记录哪一个list要修改
             changevalue: ""     //记录要修改的list值
         }
-        // this.onChange = this.onChange.bind(this);
     }
 
     handleDel(e) {
@@ -72,17 +73,16 @@ class List extends React.Component{
                     if(this.state.changenum == index) {
                         return (
                             <li key={index}>
-                                <input type="text" ref="inputnew" value={this.state.changevalue} onChange={this.handleText.bind(this)} /> 
-                                <button onClick={this.handleSave.bind(this)}>确定</button>
+                                <RBt.FormControl type="text" ref="inputnew" value={this.state.changevalue} onChange={this.handleText.bind(this)}/>
+                                <RBt.Button bsStyle="success" onClick={this.handleSave.bind(this)}>保存</RBt.Button>
                             </li>
                         )
                     }
                     else{
                         return(
                             <li key={index}>
-                                <span>{item}</span>
+                                <span onClick={this.handleChange.bind(this)} data-key={index}>{item}</span>
                                 <button onClick={this.handleDel.bind(this)} data-key={index}>删除</button>
-                                <button onClick={this.handleChange.bind(this)} data-key={index}>修改</button>
                             </li>
                         ) 
                     }

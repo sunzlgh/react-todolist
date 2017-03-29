@@ -1,7 +1,12 @@
 import React from 'react';
+
+//Because React-Bootstrap doesn't depend on a very precise version of Bootstrap, 
+//we don't ship with any included css. However, some stylesheet is required to use these components. 
+import 'bootstrap/dist/css/bootstrap.css';
+import * as RBt from "react-bootstrap";
+
 import List from './list';
 import Todolist from './todolist';
-
 
 //输入框组件，用于新增数据
 class TypeNew extends React.Component{
@@ -21,8 +26,8 @@ class TypeNew extends React.Component{
     render(){
         return (
             <div className="header">
-                <input type="text" name="" ref="inputText"/>
-                <button onClick={this.handleAdd.bind(this)}>增加</button>
+                <RBt.FormControl type="text" ref="inputText"/>
+                <RBt.Button bsStyle="success" onClick={this.handleAdd.bind(this)}>增加</RBt.Button>
             </div>
         )
     }

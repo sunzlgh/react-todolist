@@ -1,6 +1,13 @@
 # react-todolist
 react+webpack2.0+es6
 
+## 技术栈
+* ES2015
+* react 
+* react-bootstrap
+* scss
+* webpack2.0
+
 ## /app
 * index.js 入口文件
 * app/components react组件目录

@@ -12,7 +12,8 @@ class Todolist extends React.Component{
     }
     render(){
         return(
-            <div>
+            <div className="whole">
+                <h3>收件箱</h3>
                 <TypeNew todo={this.state.todolist} onAdd={this.handleChange.bind(this)} />
                 <List todo={this.state.todolist} onChange={this.handleChange.bind(this)} />
             </div>
