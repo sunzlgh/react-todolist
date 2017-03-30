@@ -7,15 +7,28 @@ class Todolist extends React.Component{
     constructor() {
         super(); //调用父类的构造函数
         this.state = {  //定义组件状态
-            todolist: ['111', '222', '333']
+            todolist: [
+                {
+                    content: "111",
+                    date: "2017-03-29"
+                },
+                {
+                    content: "222",
+                    date: "2017-03-30"
+                },
+                {
+                    content: "333",
+                    date: "2017-03-31"
+                }
+            ]
         }
     }
     render(){
         return(
-            <div className="whole">
+            <div className="main">
                 <h3>收件箱</h3>
-                <TypeNew todo={this.state.todolist} onAdd={this.handleChange.bind(this)} />
                 <List todo={this.state.todolist} onChange={this.handleChange.bind(this)} />
+                <TypeNew todo={this.state.todolist} onAdd={this.handleChange.bind(this)} />
             </div>
         )
     }

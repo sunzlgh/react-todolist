@@ -1,15 +1,45 @@
-.whole {
+.add-prev {
+    padding: 6px 13px;
+    color: #4cae4c;
+    i {
+        font-size: 20px;
+        margin-right: 3px;
+        font-weight: 700;
+    }
+}
+
+.add {
+    padding: 30px 0;
+    a {
+        margin-left: 20px;
+    }
+}
+
+.add-list {
+    height: 50px;
+    position: relative;
+}
+
+.add-text {
+    position: absolute;
+}
+
+.add-date {
+    width: 150px;
+    position: absolute;
+    right: 0;
+}
+
+.main {
     padding: 20px 30px;
     h3 {
         font-size: 20px;
-    }
-    button {
-        margin-top: 12px;
     }
 }
 
 .theList {
     list-style: none;
+    width: 800px;
     li {
         color: #333;
         position: relative;
@@ -35,4 +65,11 @@
     width: 100%;
     margin-left: 40px;
     font-size: 15px;
+}
+
+.list-date {
+    border-bottom: 1px solid #4cae4c;
+    font-size: 11px;
+    padding: 1px 0;
+    float: right;
 }

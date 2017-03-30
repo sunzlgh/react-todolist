@@ -13,7 +13,8 @@ class List extends React.Component {
         super(props);
         this.state = {  //用于记录修改状态
             changenum: -1,      //记录哪一个list要修改
-            changevalue: ""     //记录要修改的list值
+            changevalue: "",     //记录要修改的list content值
+            changedate: ""
         }
     }
 
@@ -33,11 +34,13 @@ class List extends React.Component {
     //点击修改按钮，改变state
     handleChange(e) {
         let editIndex = e.target.getAttribute('data-key');
-        let msg = this.props.todo[editIndex];
+        let msg = this.props.todo[editIndex].content;
+        let date = this.props.todo[editIndex].date;
 
         this.setState({
             changenum: editIndex,
-            changevalue: msg
+            changevalue: msg,
+            changedate: date
         })
     }
     //react对约束性组件的处理
@@ -46,9 +49,15 @@ class List extends React.Component {
             changevalue: e.target.value
         })
     }
+    handleDate(e) {
+        this.setState({
+            changedate: e.target.value
+        })
+    }
     //保存
     handleSave() {
         let newthing = this.state.changevalue;
+        let newdate = this.state.changedate;
         let rows = this.props.todo;
 
         if (newthing == "") {
@@ -56,12 +65,14 @@ class List extends React.Component {
             return;
         }
         let index = this.state.changenum;
-        rows[index] = newthing;
+        rows[index].content = newthing;
+        rows[index].date = newdate;
         this.props.onChange(rows);
 
         this.setState({
             changenum: -1,
-            changevalue: ""
+            changevalue: "",
+            changedate: ""
         })
     }
     render() {
@@ -73,18 +84,27 @@ class List extends React.Component {
                         if (this.state.changenum == index) {
                             return (
                                 <li key={index}>
-                                    <RBt.FormControl type="text" ref="inputnew" value={this.state.changevalue} onChange={this.handleText.bind(this)} />
-                                    <RBt.Button bsStyle="success" onClick={this.handleSave.bind(this)}>保存</RBt.Button>
+                                    <div className="add-list">
+                                        <input type="text" className="form-control add-text" ref="inputnew" defaultValue={item.content} onChange={this.handleText.bind(this)} />
+                                        <input type="date" className="form-control add-date" ref="inputDate" defaultValue={item.date} onChange={this.handleDate.bind(this)}/>
+                                    </div>
+                                   <RBt.Button bsStyle="success" onClick={this.handleSave.bind(this)}>保存</RBt.Button>
                                 </li>
                             )
                         }
                         else {
+                            let dateArr = item.date.split("-");
+                            if(dateArr[1].substr(0, 1) == "0"){
+                                 dateArr[1] = dateArr[1].slice(1);
+                            }
+                
                             return (
                                 <li key={index}>
-                                    {/*<input type="checkbox" className="check-del" onClick={this.handleDel.bind(this)} data-key={index} />*/}
                                     <i className="list-del" onClick={this.handleDel.bind(this)} data-key={index}></i>
-                                    <div className="list-item" onClick={this.handleChange.bind(this)} data-key={index}>{item}</div>
-                                    <div className="list-date"></div>
+                                    <div className="list-item" onClick={this.handleChange.bind(this)} data-key={index}>
+                                        {item.content}
+                                        <span className="list-date" data-key={index}>{dateArr[1]}月{dateArr[2]}日</span>
+                                    </div>
                                 </li>
                             )
                         }
