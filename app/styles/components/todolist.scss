@@ -6,13 +6,33 @@
     button {
         margin-top: 12px;
     }
-    .theList {
-        list-style: none;
-    }
-    .theList li {
+}
+
+.theList {
+    list-style: none;
+    li {
         color: #333;
-        padding: 15px;
-        margin-bottom: 15px;
-        border-bottom: 1px solid #f0f0f0;
+        position: relative;
     }
+}
+
+.list-del {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #f0f0f0;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    margin-right: 15px;
+    top: 17px;
+    left: 10px;
+    cursor: pointer;
+}
+
+.list-item {
+    padding: 15px 3px;
+    border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+    margin-left: 40px;
+    font-size: 15px;
 }

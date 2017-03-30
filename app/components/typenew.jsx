@@ -26,7 +26,8 @@ class TypeNew extends React.Component{
     render(){
         return (
             <div className="header">
-                <RBt.FormControl type="text" ref="inputText"/>
+                <input type="text" className="form-control" ref="inputText"/>
+               
                 <RBt.Button bsStyle="success" onClick={this.handleAdd.bind(this)}>增加</RBt.Button>
             </div>
         )
