@@ -13,10 +13,9 @@ react+webpack2.0+es6
 * app/components react组件目录
 * app/styles 样式目录
 
-###  开发-调试模式
-`npm start`
+###  开发模式
+`npm start`  
+默认端口: `1111`
 
-###  打包发布
-`npm run build`  
-     
-打包发布时，注意在配置中将devServer调试模式关闭！
+###  打包发布（生产模式）
+`npm run build` 

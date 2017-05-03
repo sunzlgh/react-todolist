@@ -1,6 +1,7 @@
 let path = require('path');
 let webpack = require('webpack');
 let HtmlwebpackPlugin = require('html-webpack-plugin');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const ROOT_PATH = path.resolve(__dirname);
 const APP_PATH = path.resolve(ROOT_PATH, 'app');
@@ -13,15 +14,6 @@ module.exports = {
     output: {
         path: BUILD_PATH,
         filename: 'bundle.js'
-    },
-    //启动dev source map，出错以后就会采用source-map的形式直接显示你出错代码的位置
-    devtool: 'eval-source-map',
-    devServer: {
-        host: '0.0.0.0',
-        port: 1111,
-        contentBase: "./", // 本地服务器所加载的页面所在的目录
-        historyApiFallback: true, // 不跳转
-        inline: true // 实时刷新
     },
     module: {
         rules: [{
@@ -44,11 +36,10 @@ module.exports = {
             },
             {
                 test: /\.(sass|scss|css)$/,
-                use: [
-                    'style-loader', 
-                    'css-loader', 
-                    'sass-loader'
-                ]         
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: ['css-loader', 'sass-loader']
+                })
             },
             {
                 test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg)$/,
@@ -59,15 +50,28 @@ module.exports = {
                         name: 'img/[name].[ext]'
                     }
                 }]
-            }
+            } 
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            "process.env": { 
+                NODE_ENV: JSON.stringify("production") 
+            }
+        }),
+        //使用uglifyJs压缩js代码
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true,
+            comments: false, //去掉注释
+            compress: {
+                warnings: false //忽略警告,要不然会有一大堆的黄色字体出现
+            }
+        }),
         new HtmlwebpackPlugin({
             template: './index.html', // 模版文件
             // favicon: path.resolve(APP_PATH, './styles/img/favicon.ico')
         }),
-        new webpack.HotModuleReplacementPlugin() // 热加载插件
+        new ExtractTextPlugin('styles.css'), //分离css文件,注意该插件由于和webpack2不兼容，需要指定版本
     ],
     //自动扩展文件后缀名，意味着require模块可以省略不写后缀名
     resolve: {
